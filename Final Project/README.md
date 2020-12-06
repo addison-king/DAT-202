@@ -57,6 +57,8 @@ Finally we can see how we did. Plot the prediction vs the historical data. Calcu
     
     prophet_RMSE_value = sqrt(mean_squared_error(df_future['y'], forecast['yhat']))
 
+> Root mean squared error (RMSE) = 2,168
+
 Plot the predicted data vs the actual data.
 
     plot = pyplot.figure(figsize=(14,8))
@@ -84,7 +86,7 @@ Plot the predicted data vs the actual data.
     pyplot.xlabel('Datetime point number')
     pyplot.ylabel('MW Generation')
 
-
+![enter image description here](https://raw.githubusercontent.com/brandyn-gilbert/DAT-202/main/Final%20Project/Prophet_Graph.png)
 
 # Part II: AR (AutoRegressive)
 
