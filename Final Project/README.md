@@ -89,7 +89,160 @@ Plot the predicted data vs the actual data.
 ![enter image description here](https://raw.githubusercontent.com/brandyn-gilbert/DAT-202/main/Final%20Project/Prophet_Graph.png)
 
 # Part II: AR (AutoRegressive)
+Begin by importing both .csv files (historical data and test data). Then extract the values from each series (values being MW amounts).
+
+    series_past = read_csv('Past_data.csv', header=0, index_col=0, parse_dates=True, squeeze=True)
+    training = series_past.values
+    
+    series_current = read_csv('Actual_data.csv', header=0, index_col=0, parse_dates=True, squeeze=True)
+    test = series_current.values
+
+Next we build our AR model. 
+
+    lags=1000
+    model = AutoReg(training, lags=lags, old_names=False)
+    model_fit = model.fit()
+Finally we use our model to create predictions and compute RMSE values. (Note: I ran this a few times with different lag values to see what would work best/time).
+
+    predictions = model_fit.predict(start=len(training), end=len(training)+len(test)-1, dynamic=False)
+    rmse = sqrt(mean_squared_error(test, predictions))
+
+> Lag ## : RMSE Value 
+> Lag 50: 	2797.858 
+> Lag 100: 	2763.947 
+> Lag 200: 	2659.908 
+> Lag 500: 	2580.148 
+> Lag 1000: 2571.554 
+> Lag 2000: 2354.487 
+> Lag 5000: 2342.198
+
+Let's visualize how close our model is.
+
+    plot = pyplot.figure(figsize=(14,8))
+    
+    ax1 = plot.add_subplot(311)
+    pyplot.plot(test, color='black')
+    pyplot.plot(predictions, color='green')
+    pyplot.ylabel('MW Generation')
+    pyplot.title('Wind Generation - AR')
+    pyplot.gca().legend(('Actual','Predicted'), loc='upper left')
+    #
+    ax2 = plot.add_subplot(312)
+    pyplot.plot(test, color='black')
+    pyplot.plot(predictions, color='green')
+    ax2.set_xlim([0, 240])
+    pyplot.ylabel('MW Generation')
+    pyplot.gca().legend(('Actual','Predicted'), loc='upper left')
+    #
+    ax3 = plot.add_subplot(313)
+    pyplot.plot(test, color='black')
+    pyplot.plot(predictions, color='green')
+    ax3.set_xlim([0, 120])
+    pyplot.xlabel('Datetime point number')
+    pyplot.ylabel('MW Generation')
+    pyplot.gca().legend(('Actual','Predicted'), loc='upper left')
+
+![enter image description here](https://raw.githubusercontent.com/brandyn-gilbert/DAT-202/main/Final%20Project/AR_Graph.png)
+
+
 
 # Part III: ARMA (AutoRegressive Moving Average)
+Begin the same way as the previous model: import .csv, extract the MW values, and check for any null values.
+
+    series_past = read_csv('Past_data.csv', header=0, index_col=0, parse_dates=True, squeeze=True)
+    series_current = read_csv('Actual_data.csv', header=0, index_col=0, parse_dates=True, squeeze=True)
+    
+    training = DataFrame(series_past.values)
+    test = DataFrame(series_current.values)
+    
+    check = training.isnull().values.any()
+
+We will now create a "lag" dataset to accompany our actual data. Simply, data at t=0 is "lagged" to be t=1. We end up with a dataframe containing two columns: time and time+1.
+
+    df_training_lag = concat([training.shift(1), training], axis=1)
+    df_training_lag.columns = ['time', 'time+1']
+    
+    df_test_lag = concat([test.shift(1), test], axis=1)
+    df_test_lag.columns = ['time', 'time+1']
+   
+    # df_test_lag: position 0, column 'time', is a nAn value. 
+    # It needs to be set to the last value in the 'time+1' column from df_training_lag.
+    df_test_lag.at[0,'time'] = df_training_lag.at[len(training)-1,'time+1']
+
+Extract the values from each dataframe (creating an array of arrays). Then extract the array of arrays to simply an array of data.
+
+    training_values = df_training_lag.values
+    testing_values = df_test_lag.values
+    
+    training_i, training_actual = training_values[:,0], training_values[:,1]
+    testing_i, testing_actual = testing_values[:,0], testing_values[:,1]
+
+Creation of residuals. To do this, we need to convert the array for training (col [0] basically) to a list. Take the resulting list, subtract the "predicted" value from the "actual" value. 
+
+    training_prediction = [x for x in training_i]
+    training_residual = []
+    for i in range(len(training_prediction)):
+        if math.isnan(training_actual[i]-training_prediction[i]) is False:
+            training_residual += [training_actual[i]-training_prediction[i]]
+
+Time to create our model. We do this basically the same way as the AR above.
+
+    model = AutoReg(training_residual, lags=1000, old_names=False)
+    model_fit = model.fit()
+    coef = model_fit.params
+
+With our model, we can now apply our residuals to our predicted data. (For reference, this bit of code was used from the textbook: "Introduction to Time Series Forecasting With Python" by Jason Brownlee).
+
+    span = 20
+    history = training_residual[len(training_residual)-span:]
+    
+    predictions = []
+    history_length = len(history)
+    
+    for i in range(len(testing_actual)):
+        yhat = testing_i[i]
+        error = testing_actual[i] - yhat
+        lag = [history[i] for i in range(history_length-span,history_length)]
+        predicted_error = coef[0]
+        for j in range(span):
+            predicted_error += coef[j+1] * lag[span-j-1]
+        yhat = yhat + predicted_error
+        predictions.append(yhat)
+        history.append(error)
+
+With predicted data, we can: compute RMSE, visually inspect closeness.
+
+    RMSE = sqrt(mean_squared_error(testing_actual, predictions))
+
+> RMSE = 456
+
+    plot = pyplot.figure(figsize=(14,8))
+    
+    ax1 = plot.add_subplot(311)
+    pyplot.plot(testing_actual, color='black')
+    pyplot.plot(predictions, color='green')
+    pyplot.ylabel('MW Generation')
+    pyplot.title('Wind Generation - ARMA')
+    pyplot.gca().legend(('Actual','Predicted'), loc='upper left')
+    #
+    ax2 = plot.add_subplot(312)
+    pyplot.plot(testing_actual, color='black')
+    pyplot.plot(predictions, color='green')
+    ax2.set_xlim([0, 240])
+    pyplot.ylabel('MW Generation')
+    pyplot.gca().legend(('Actual','Predicted'), loc='upper left')
+    #
+    ax3 = plot.add_subplot(313)
+    pyplot.plot(testing_actual, color='black')
+    pyplot.plot(predictions, color='green')
+    ax3.set_xlim([0, 120])
+    pyplot.xlabel('Datetime point number')
+    pyplot.ylabel('MW Generation')
+    pyplot.gca().legend(('Actual','Predicted'), loc='upper left')
+![enter image description here](https://raw.githubusercontent.com/brandyn-gilbert/DAT-202/main/Final%20Project/MA_Graph.png)
+
+
 
 # Part IV: ARIMA (AutoRegressive Integrated Moving Average)
+
+
