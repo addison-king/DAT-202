@@ -106,15 +106,16 @@ Finally we use our model to create predictions and compute RMSE values. (Note: I
 
     predictions = model_fit.predict(start=len(training), end=len(training)+len(test)-1, dynamic=False)
     rmse = sqrt(mean_squared_error(test, predictions))
+|Lag ##|RMSE  |
+|--|--|
+| 50|2798  |
+| 100 |2764  |
+| 200 | 2660 |
+| 500 | 2580 |
+| 1000 |2572  |
+| 2000 | 2354 |
+|5000  |2342  |
 
-> Lag ## : RMSE Value 
-> Lag 50: 	2797.858 
-> Lag 100: 	2763.947 
-> Lag 200: 	2659.908 
-> Lag 500: 	2580.148 
-> Lag 1000: 2571.554 
-> Lag 2000: 2354.487 
-> Lag 5000: 2342.198
 
 Let's visualize how close our model is.
 
