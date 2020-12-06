@@ -245,4 +245,48 @@ With predicted data, we can: compute RMSE, visually inspect closeness.
 
 # Part IV: ARIMA (AutoRegressive Integrated Moving Average)
 
+As with models above, read in our .csv files to a series, then extract the MW values.
+
+    series_past = read_csv('Past_data.csv', header=0, index_col=0, parse_dates=True, squeeze=True)
+    series_current = read_csv('Actual_data.csv', header=0, index_col=0, parse_dates=True, squeeze=True)
+    
+    training = series_past.values
+    testing = series_current.values
+
+To estimate what lag number we should use, we can look at PACF (partial autocorrelation) graphs. 
+![enter image description here](https://raw.githubusercontent.com/brandyn-gilbert/DAT-202/main/Final%20Project/ARIMA_PACF.png)
+Easily we can see that using a lag of 3 would be best (3 values are significantly different from 0).
+With our lag, we can create our model.
+
+    model = ARIMA(training, order=(3,1,0))
+    model_fit = model.fit(disp=0)
+    output = model_fit.forecast()
+
+Now to create a list of historical data from an array. I shrunk the array down from 85,000+ to 20. This was so my laptop would handle the data a little more quickly.
+
+    training_history = [x for x in training]
+    training_history = training_history[len(training_history)-20:]
+
+Finally, we will use our model and historical data to create predictions. 
+
+    predictions = []
+    for i in range(len(testing)):
+        model = ARIMA(training_history, order=(3,1,0))
+        model_fit = model.fit(disp=0)
+        output = model_fit.forecast()
+        yhat = output[0]
+        predictions.append(yhat)
+        observation = testing[i]
+        training_history.append(observation)
+
+Compute the RMSE.
+
+> RMSE = 299.797
+
+Output the graphics to visually see how close we got.
+![enter image description here](https://raw.githubusercontent.com/brandyn-gilbert/DAT-202/main/Final%20Project/ARIMA_Graph.png)
+
+
+
+
 
