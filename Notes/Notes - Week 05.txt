@@ -1,0 +1,23 @@
+DAT 202 - Data Analytics 2
+	Week 05
+	Notes
+	
+Data Cleaning
+	
+
+Open Refine
+	Github: https://github.com/zachary-trozenski/dat202_ccac/blob/master/openrefine_lesson/OpenRefine.md
+	**Video in folder**
+	
+	
+	
+	
+	
+Homework:
+	Readings:
+		https://www.hhs.gov/hipaa/for-professionals/security/laws-regulations/index.html
+		http://sitn.hms.harvard.edu/flash/2019/health-data-privacy/
+	Student Lessons:
+		Previous Week
+		This Week
+	**Learn and prepare my own lesson**

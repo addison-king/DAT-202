@@ -1,0 +1,15 @@
+DAT 202 - Data Analytics 2
+	Week 04
+	Notes
+	
+	
+Video Lesson #1:
+	"K-Nearest Neighbors"
+	
+
+Video Lesson #2:
+	"Baye's"
+	
+Homework:
+	https://www.youtube.com/watch?v=vPokIvli8yk
+	Work on student teaching

@@ -1,0 +1,11 @@
+DAT 202 - Data Analytics 2
+	Week 08
+	Notes
+	
+Machine Learning
+	Traditional programming:
+		rules + data = answers
+	Machine learning prog.:
+		data + answers(?) = rules
+		
+		collect the data >>> prepare the data (cleaning) >>> train model >>> evaluate model >>> deploy model

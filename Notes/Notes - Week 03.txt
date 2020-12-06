@@ -1,0 +1,11 @@
+DAT 202 - Data Analytics 2
+	Week 03
+	Notes
+	
+
+y = mx + b
+
+Homework:
+	https://www.youtube.com/watch?v=NUk6QN02UxQ
+	
+	Also, work on teaching

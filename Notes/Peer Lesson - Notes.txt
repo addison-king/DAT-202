@@ -1,0 +1,61 @@
+DAT 202 - Data Analytics 2
+	Week 06
+	Peer Lesson - ARMA
+	
+What is ARMA?
+
+What is AR?
+	"Autoregressive" model
+	You're trying to predict something based on past "lag" values:
+		"What is the price going to be today, based on the price yesterday, last week, last month, last year?"
+	Could be the price of houses, stockmarket, quantity of eggs, weather
+	Notation:
+		Xt = cost today
+		Xt-1 = cost last month
+		Xt-12 = cost last year
+		"Lag" = the time variable. Ex: 1 day ago, 2 days ago :: lag1, lag2
+			We want to use lags that are statistically meaningful, either positive or negative.
+				That is, the lag has a direct correlation to the price today.
+			We don't want to use all the lags. If a lags relation is close to zero and we use it, it will make our model noisy and inaccurate.
+	Model:
+		B0 + B1*Mt-1 + B2*Mt-2 + ... + Bn*Mt-n + E
+		Bn 		= some coefficient
+		Mt-n 	= lag value
+		E 		= error
+	
+What is MA?
+	"Moving Average" model
+	You're trying to predict something based on past error values
+	Value today = baseline_value + coefficient*Error_t-1
+	So each month (hour, day, year, etc) you start with a baseline value. Then you add to it the multiplication of a coefficient and how much you were off by last month.
+	
+	Residual Error - Differences between predicted and observed
+	
+	MA(1) = using the error from 1 time interval ago
+			F_hat_t = M + Φ1*εt-1
+	MA(2) = using the error from 2 most recent time intervals ago
+			F_hat_t = M + Φ1*εt-1 + Φ2*εt-2
+	Actual Number(1) 
+			F_t = M + Φ1*εt-1 + εt
+			
+			
+
+How to use them together?
+	Auto-Regressive Moving Average model
+	ARMA(1,1)
+		AR(1) = AR lag=1
+		MA(1) = MA error from 1 time interval ago
+		f_t = ß_0 + ß_1*f_t-1 + Φ1*εt-1 + εt
+			f_t = the value we are wanting
+			ß_0 = constant
+		AR>	ß_1*f_t-1 = coefficient * value from last time
+		MA>	Φ1*εt-1 = coefficient * error from last time
+			εt = error for right now
+		predicted value:	
+			f_hat_t = ß_0 + ß_1*f_t-1 + Φ1*εt-1
+
+Syntax definitions.
+
+Python code - AR
+
+Python code - MA

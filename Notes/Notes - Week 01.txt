@@ -1,0 +1,25 @@
+DAT 202 - Data Analytics 2
+	Week 01
+	Notes
+	
+
+** Forecasting **
+	> Qualitative
+	> Quantitative
+		>> Time Series
+			> Moving Averages
+			> Exonential Smoothing
+			> ARIMA
+			> X11
+		>> Causal
+			> Regression
+			> Econometric Model
+			> Leading Indicator
+	
+
+
+** Homework **
+	3 readings in blackboard
+	Do NOT read ch. 2 Brownlee
+	Think about peer lesson topic
+	

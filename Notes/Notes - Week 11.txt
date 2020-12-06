@@ -1,0 +1,7 @@
+DAT 202 - Data Analytics 2
+	Week 11
+	Nov. 11, 2020
+	Notes
+	
+Prophet 
+	https://nbviewer.jupyter.org/github/nicolasfauchereau/Auckland_Cycling/blob/master/notebooks/Auckland_cycling_and_weather.ipynb

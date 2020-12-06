@@ -1,0 +1,243 @@
+[
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "CZ_NAME_STR",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "Zone",
+          "zone"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Zone"
+      },
+      {
+        "from": [
+          "Allegheny",
+          "allegheny"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Allegheny"
+      }
+    ],
+    "description": "Mass edit cells in column CZ_NAME_STR"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "CZ_NAME_STR",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "ALLEGHENY CO.",
+          "allegheny_co."
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "ALLEGHENY CO."
+      },
+      {
+        "from": [
+          "allegheny county",
+          "ALLEGHENY_COUNTY"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "ALLEGHENY CO."
+      },
+      {
+        "from": [
+          "allegeny county",
+          "allegheny county"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "ALLEGHENY CO."
+      }
+    ],
+    "description": "Mass edit cells in column CZ_NAME_STR"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "CZ_NAME_STR",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "A_ZONE"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "ALLEGHENY (ZONE)"
+      }
+    ],
+    "description": "Mass edit cells in column CZ_NAME_STR"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "CZ_NAME_STR",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "Allegheny"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "ALLEGHENY (ZONE)"
+      }
+    ],
+    "description": "Mass edit cells in column CZ_NAME_STR"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "CZ_NAME_STR",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "allegeny"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "ALLEGHENY (ZONE)"
+      }
+    ],
+    "description": "Mass edit cells in column CZ_NAME_STR"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "CZ_NAME_STR",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "Zone"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "ALLEGHENY (ZONE)"
+      }
+    ],
+    "description": "Mass edit cells in column CZ_NAME_STR"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "CZ_NAME_STR",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "county"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "ALLEGHENY CO."
+      }
+    ],
+    "description": "Mass edit cells in column CZ_NAME_STR"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "EVENT_TYPE",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "High Wind"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Strong Wind"
+      }
+    ],
+    "description": "Mass edit cells in column EVENT_TYPE"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "DAMAGE_PROPERTY_NUM",
+    "expression": "value.toNumber()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column DAMAGE_PROPERTY_NUM using expression value.toNumber()"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "DAMAGE_CROPS_NUM",
+    "expression": "value.toNumber()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column DAMAGE_CROPS_NUM using expression value.toNumber()"
+  },
+  {
+    "op": "core/column-addition",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "baseColumnName": "DAMAGE_CROPS_NUM",
+    "expression": "grel:cells[\"DAMAGE_PROPERTY_NUM\"].value + cells[\"DAMAGE_CROPS_NUM\"].value \nreturn value",
+    "onError": "set-to-blank",
+    "newColumnName": "DAMAGE_TOTAL_NUM",
+    "columnInsertIndex": 12,
+    "description": "Create column DAMAGE_TOTAL_NUM at index 12 based on column DAMAGE_CROPS_NUM using expression grel:cells[\"DAMAGE_PROPERTY_NUM\"].value + cells[\"DAMAGE_CROPS_NUM\"].value \nreturn value"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "BEGIN_DATE",
+    "expression": "value.toDate()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column BEGIN_DATE using expression value.toDate()"
+  }
+]

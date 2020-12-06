@@ -1,0 +1,13 @@
+DAT 202 - Data Analytics 2
+	Week 02
+	Notes
+	
+My topic:
+	ARMA
+	
+	Topic reading:
+		Chapter 22 & 23 Brownlee
+		https://www.statsmodels.org/stable/examples/notebooks/generated/tsa_arma_0.html
+		
+	Due Date:
+		October 6th      

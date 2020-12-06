@@ -1,0 +1,53 @@
+DAT 202 - Data Analytics 2
+	Week 10
+	Async. Class - Week of Nov. 3, 2020
+	Notes
+	
+Weapons of Math Destruction | Cathy O'Neil | https://www.youtube.com/watch?v=TQHs8SA1qpk
+	AAA credit rating was lying about the truth. The trust in mathmatics was abused.
+	Algorithms are opinions embedded in code.
+	Success can be defined as different things and can be opposing. Over time you want to train your algorithms for success (whatever that may be).
+	There is no such thing as an objective algotithm b/c at the very least the person designing the algorithm defines success.
+	
+	
+	WMD - Widespread Mysterious Destructive
+		Widespread - affect on many people and/or multiple areas of life
+		Mysterious - "not aware they are being scored" 
+		Destrutive - ruin peoples lives unfairly. 
+		
+	First example: Teacher Assessment
+		(1st gen) Label a teacher as bad if a certain # of students do not pass a standardized test.
+			Problem with this is poverty students do worse on tests.
+		(2nd gen) Teacher is held accountable for the difference between the expected yearly student score and the actual yearly student score.
+			Problem with this is that this model is very noisy.
+			No source code was given out (mysterious) and this model was used to deny teachers tenure (widespread, destructive)
+		The scatterplot was nearly random looking. (with no correlation, it is a bad model)
+		Some students were "erased" where the teacher would cheat on the scores so the teacher wouldn't look bad, resulting in the next teacher expecting to maintain that high score, but the student is not able to perform to that level. Without the second teacher also cheating, that teacher would be severely negatively impacted.
+	
+	Second Example: Hiring Algorithm
+		A hiring exam was being used as a mental health assessment and denying a subset of the population (illegal under the disability act)
+		
+	Third Example: Criminal Justice
+		Predictive-policing
+			"Go put police where we saw police arresting people in the past"
+		
+		
+	Q&A
+		What is the use case for the algorithm? 
+			Positive use (ex intervention to help people)
+			Negative use (ex higher risk people are put into worse conditions)
+		Annonymity
+			Just because the data has been annonymized, does not mean it cannot cause harm. The anon data can be used to train a model that can then be applied to persons and give some of them higher risk scores. You can discriminate against others by using anon data.
+		
+
+Data Analyst Expectations vs Reality | https://www.youtube.com/watch?v=1xT68oeQTd0
+	1. Expectation - Most work on data visualizations
+	   Reality - only 10-20% visualization. Most work on data cleaning.
+	2. Expectation - Have to know all the latest tools and tech.
+	   Reality - Sticking with basics of: SQL, python, tableau, excel, powerbi
+	3. Expectation - My analysis will have a huge impact on the company
+	   Reality - 95% of your work will be small tasks
+	4. Expectation - Use all your tools in your job
+	   Reality - The company uses 3-5 products they use for everything
+	5. Expectation - Alot of money
+	   Reality - lol

@@ -1,0 +1,77 @@
+DAT 202 - Data Analytics 2
+	Final Project
+	
+Stated Assignment
+	1) I give you a choice of dataset. You're allowed to go off-menu, but I promised to provide you with some options.
+		These are the three I've got set aside so far: Port Authority ridership by month by route, stocks over time (thanks Jill!), electricity usage by hour - the basis of today's data, but it needs cleaning before it's usable. (What else should be on this menu? Something about temperatures over time?)
+
+	2) You run some forecasts on your chosen dataset, using two or more techniques we've covered this semester. (If you choose the electricity dataset and want to use Prophet, that's cool, but I need to see you do something drastically differently from what I did.)
+		Your analyses should be reproducible, which means you keep a record of everything you've done to your data. Maybe you build a notebook (with notes about any processing on Excel or OpenRefine), or maybe you keep your code in one place and write up a report in Word; I'm OK with either.
+		There should be some graphics and at least some attempt at an explanation that someone without data analytics training could follow.
+	
+	3) You compare the models you've created and explain why you believe one is better than the other. (Not just "look, the RMSE is lower," but "I think this model is superior for this dataset because ___")
+
+	4) We meet during the final exam period for this course (December 8, 6pm), and you take turns talking about your analyses. It's not a formal presentation, and you don't have to talk for more than 5 minutes if you don't want to. But I want you to share your findings with the rest of us.
+	
+Plan of Attack
+	1.) Choosing a dataset
+		a.) Compare the datasets. Pick whichever one strikes my fancy.
+	
+	2.) Clean the data
+		a.) Log all changes.
+	
+	3.) Compile forecasting techniques
+		a.) List all the techniques
+		b.) Apply at least 2 to the dataset
+	
+	4.) Compare the results
+		a.) Defend why one forecast is better than the other
+		b.) Use technical and non-technical reasons
+	
+	5.) Prepare the presentation
+		a.) Graphic of some kind
+		b.) Jupyter notebook with thoughts and notes
+		
+		
+Work Notes
+	1.) Dataset: Wind Generation - RFC - (2011-Present)
+		https://dataminer2.pjm.com/feed/wind_gen
+			The  website restricted searches to 366-day increments. 
+			10 .csv files were exported.
+			The dates spanned from 1/1/yyyy to 12/31/yyyy.
+		Selected region: RFC
+			"RFC includes New Jersey, Pennsylvania, Maryland, the District of Columbia, West Virginia, Ohio, Indiana, Lower Michigan and portions of Upper Michigan, Wisconsin, Illinois, Kentucky, Tennessee and Virginia."
+		
+		
+	2.) OpenRefine
+		a.) Opened the 10 .csv files to combine them all.
+		b.) Using facets to: 
+				check for any blank. None were found.
+				Removed UTC column.
+				Alter EST column (cell >> transform >> "toDate(value, "M/d/y hh:mm:ss aa")")
+				Sorted by EST time column.
+					"Reorder rows permanently"
+				Prepare for prophet:
+					replace(value, "T"," ")
+					replace(value, "Z","")
+				Delete "Area" and "File" columns.
+				
+	3a.) Prophet
+		Using the quickstart example from: https://facebook.github.io/prophet/docs/quick_start.html#python-api
+		And using the in-class example from Coral:
+			featuring "DUQ_hourly.csv"
+		
+		
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
