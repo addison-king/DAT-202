@@ -288,6 +288,21 @@ Output the graphics to visually see how close we got.
 ![enter image description here](https://raw.githubusercontent.com/brandyn-gilbert/DAT-202/main/Final%20Project/ARIMA_Graph.png)
 
 
+# Part V: Prophet (Try 2)
 
+Building off of the code from the first prophet try, let's see if we can tweak some settings in the model building.
+We are going to edit the seasonalities, and changepoint_prior_scale.
 
+    model = Prophet(changepoint_prior_scale=0.80,
+                      daily_seasonality=True, 
+                      weekly_seasonality=True,
+                      yearly_seasonality=True
+                     ).add_seasonality(name='hourly',
+                                       period=0.04167,
+                                       fourier_order=20
+                                      )
+Sadly this hasn't helped our forecast and our RMSE value is actually worse than before. When looking at the graphs, they look very similar, and not much has changed.
+(If anyone has a lot more experience with prophet and can help me with this, I'd appreciate the knowledge).
 
+> RMSE = 2220
+![enter image description here](https://raw.githubusercontent.com/brandyn-gilbert/DAT-202/main/Final%20Project/Prophet_2_Graph.png)
