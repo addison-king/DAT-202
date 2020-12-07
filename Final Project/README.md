@@ -282,7 +282,7 @@ Finally, we will use our model and historical data to create predictions.
 
 Compute the RMSE.
 
-> RMSE = 299.797
+> RMSE = 300
 
 Output the graphics to visually see how close we got.
 ![enter image description here](https://raw.githubusercontent.com/brandyn-gilbert/DAT-202/main/Final%20Project/ARIMA_Graph.png)
@@ -306,3 +306,20 @@ Sadly this hasn't helped our forecast and our RMSE value is actually worse than 
 
 > RMSE = 2220
 ![enter image description here](https://raw.githubusercontent.com/brandyn-gilbert/DAT-202/main/Final%20Project/Prophet_2_Graph.png)
+
+# Conclusion
+
+Let's try and answer the overarching question: "which method is best?"
+
+We can start by comparing the root mean squared error (RMSE) numbers. 
+|Method|RMSE  |
+|--|--|
+| Prophet (1) |2,168  |
+|AR  |2,342  |
+|ARMA  |456  |
+|ARIMA  |300  |
+| Prophet (2) | 2,220 |
+
+Laid out like this, ARIMA is the best method for forecasting. But this doesn't tell the whole story. ARMA and ARIMA as so good at this because we are able to calculate our errors (residuals) as we go. Comparing to prophet which uses past data and creates an estimate for where it thinks the data will go.
+
+All in all, there is no best. It really depends on your application and how far into the future you're trying to estimate.  
