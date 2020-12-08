@@ -6,7 +6,7 @@
 ___
 # Data Information
 Source: https://dataminer2.pjm.com/feed/wind_gen
-This site provides the hourly electrical wind generation amounts from all areas owned by PJM. I selected to use only the "Area" RFC (ReliabilityFirst Corporation).
+This site provides the hourly wind generation amounts from all areas owned by PJM. I selected to use only the "Area" RFC (ReliabilityFirst Corporation).
 ![enter image description here](https://rfirst.org/about/PublishingImages/About%20Us%20Map.png)
 
 The dataset was created by selecting 1-year increments from 2011-2019. The data for 2020 was split in two: January - September and October - November. The first part of 2020 was used in conjunction with the older data. The Oct/Nov data is used for a comparison to our predicted values.
@@ -293,14 +293,18 @@ Output the graphics to visually see how close we got.
 Building off of the code from the first prophet try, let's see if we can tweak some settings in the model building.
 We are going to edit the seasonalities, and changepoint_prior_scale.
 
-    model = Prophet(changepoint_prior_scale=0.80,
-                      daily_seasonality=True, 
-                      weekly_seasonality=True,
-                      yearly_seasonality=True
-                     ).add_seasonality(name='hourly',
+    model = Prophet(changepoint_prior_scale=10,
+                    seasonality_prior_scale=0.1,
+                    n_changepoints=10,
+                    seasonality_mode = "multiplicative",
+                    daily_seasonality=True, 
+                    weekly_seasonality=True,
+                    yearly_seasonality=True
+                    ).add_seasonality(name='hourly',
                                        period=0.04167,
-                                       fourier_order=20
+                                       fourier_order=15
                                       )
+
 Sadly this hasn't helped our forecast and our RMSE value is actually worse than before. When looking at the graphs, they look very similar, and not much has changed.
 (If anyone has a lot more experience with prophet and can help me with this, I'd appreciate the knowledge).
 
@@ -322,4 +326,4 @@ We can start by comparing the root mean squared error (RMSE) numbers.
 
 Laid out like this, ARIMA is the best method for forecasting. But this doesn't tell the whole story. ARMA and ARIMA as so good at this because we are able to calculate our errors (residuals) as we go. Comparing to prophet which uses past data and creates an estimate for where it thinks the data will go.
 
-All in all, there is no best. It really depends on your application and how far into the future you're trying to estimate.  
+All in all, there is no best. It really depends on your application and how far into the future you're trying to estimate.
