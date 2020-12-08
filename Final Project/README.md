@@ -308,7 +308,7 @@ We are going to edit the seasonalities, and changepoint_prior_scale.
 Sadly this hasn't helped our forecast and our RMSE value is actually worse than before. When looking at the graphs, they look very similar, and not much has changed.
 (If anyone has a lot more experience with prophet and can help me with this, I'd appreciate the knowledge).
 
-> RMSE = 2220
+> RMSE = 2993
 ![enter image description here](https://raw.githubusercontent.com/brandyn-gilbert/DAT-202/main/Final%20Project/Prophet_2_Graph.png)
 
 # Conclusion
@@ -322,7 +322,7 @@ We can start by comparing the root mean squared error (RMSE) numbers.
 |AR  |2,342  |
 |ARMA  |456  |
 |ARIMA  |300  |
-| Prophet (2) | 2,220 |
+| Prophet (2) | 2,993 |
 
 Laid out like this, ARIMA is the best method for forecasting. But this doesn't tell the whole story. ARMA and ARIMA as so good at this because we are able to calculate our errors (residuals) as we go. Comparing to prophet which uses past data and creates an estimate for where it thinks the data will go.
 
