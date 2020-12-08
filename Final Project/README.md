@@ -6,7 +6,7 @@
 ___
 # Data Information
 Source: https://dataminer2.pjm.com/feed/wind_gen
-This site provides the hourly wind generation amounts from all areas owned by PJM. I selected to use only the "Area" RFC (ReliabilityFirst Corporation).
+This site provides the hourly electrical wind generation amounts from all areas owned by PJM. I selected to use only the "Area" RFC (ReliabilityFirst Corporation).
 ![enter image description here](https://rfirst.org/about/PublishingImages/About%20Us%20Map.png)
 
 The dataset was created by selecting 1-year increments from 2011-2019. The data for 2020 was split in two: January - September and October - November. The first part of 2020 was used in conjunction with the older data. The Oct/Nov data is used for a comparison to our predicted values.
